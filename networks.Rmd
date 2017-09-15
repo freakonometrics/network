@@ -1,0 +1,43 @@
+---
+title: "Networks, Basic R Functions"
+author: "Arthur Charpentier"
+date: "septembre 2017"
+output: md_document
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(networkD3)
+library(network)
+library(sna)
+library(igraph)
+library(ggnet)
+```
+
+```{r}
+library(network)
+data(flo)
+net = network(flo, directed = FALSE)
+plot(net,displaylabels=TRUE,boxed.labels=FALSE)
+```
+
+```{r}
+ggnet2(net,label=TRUE)
+```
+
+```{r}
+g=graph_from_adjacency_matrix(flo)
+e=E(g)
+v=V(g)
+plot(g)
+```
+
+```{r}
+df=as.data.frame(ends(g, E(g)))
+names(df)=c("src","target")
+simpleNetwork(df)
+```
